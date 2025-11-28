@@ -3,6 +3,7 @@ defineProps<{
   columnIndex: number;
   rowIndex: number;
   isTileEnabled: boolean;
+  letter: string;
 }>();
 </script>
 
@@ -11,7 +12,7 @@ defineProps<{
     class="tile-item"
     :class="{ 'tile-item-enabled': isTileEnabled, 'tile-item-disabled': !isTileEnabled }"
   >
-    <span>Tile {{ columnIndex }}-{{ rowIndex }}</span>
+    <span>{{ letter }}</span>
   </div>
 </template>
 

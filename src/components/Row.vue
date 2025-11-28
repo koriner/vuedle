@@ -1,15 +1,25 @@
 <script setup lang="ts">
 import Tile from '@/components/Tile.vue';
-defineProps<{
+import { ref } from 'vue';
+import { useGameStore } from '@/stores/game-store';
+const props = defineProps<{
   index: number;
   isRowEnabled: boolean;
 }>();
+
+const gameStore = useGameStore();
+const row = ref<string[]>(gameStore.rows[props.index]);
 </script>
 
 <template>
   <div class="row-view">
-    <div v-for="(n, i) in 6" :key="i">
-      <Tile :columnIndex="i" :rowIndex="index" :isTileEnabled="isRowEnabled" />
+    <div v-for="(n, i) in 5" :key="i">
+      <Tile
+        :columnIndex="i"
+        :rowIndex="index"
+        :isTileEnabled="isRowEnabled"
+        :letter="row[i] ?? ''"
+      />
     </div>
   </div>
 </template>

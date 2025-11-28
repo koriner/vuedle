@@ -17,6 +17,7 @@ onMounted(async () => {
 
   if (wordValue) {
     word.value = wordValue;
+    gameStore.setLetters(wordValue.letters);
   }
   if (rowsValue) {
     rows.value = rowsValue as string[][];

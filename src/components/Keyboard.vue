@@ -1,14 +1,48 @@
 <script setup lang="ts">
 import { useAlphabetStore } from '@/stores/alphabet-store';
 import { ArrowTurnDownLeftIcon, BackspaceIcon } from '@heroicons/vue/24/solid';
+import { onMounted } from 'vue';
+import { useGameStore } from '@/stores/game-store';
 
+const gameStore = useGameStore();
 const alphabetStore = useAlphabetStore();
 const alphabet: string[] = alphabetStore.getAlphabet();
+
+const handleKeyboardEvent = (event: KeyboardEvent) => {
+  if (event.key === 'Enter') {
+    gameStore.submitRow();
+  } else if (event.key === 'Backspace') {
+    gameStore.removeLastLetterFromRow();
+  } else {
+    if (/^[A-Z]$/.test(event.key.toUpperCase())) {
+      gameStore.addLetterToRow(event.key.toUpperCase());
+    }
+  }
+};
+
+const handleLetterClick = (letter: string): void => {
+  if (letter === 'ENTER') {
+    gameStore.submitRow();
+  } else if (letter === 'BACKSPACE') {
+    gameStore.removeLastLetterFromRow();
+  } else {
+    gameStore.addLetterToRow(letter);
+  }
+};
+
+onMounted(() => {
+  window.addEventListener('keyup', handleKeyboardEvent);
+});
 </script>
 
 <template>
   <div class="keyboard-view">
-    <span class="keyboard-letter" v-for="letter in alphabet" :key="letter">
+    <span
+      class="keyboard-letter"
+      v-for="letter in alphabet"
+      :key="letter"
+      @click="handleLetterClick(letter)"
+    >
       <template v-if="letter !== 'ENTER' && letter !== 'BACKSPACE'">
         {{ letter }}
       </template>
