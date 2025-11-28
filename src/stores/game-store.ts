@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-
+import type { WordResult } from '@/types/words';
 /**
  * This state contains game logic and progress.
  */
@@ -9,7 +9,12 @@ for (let i = 0; i < 6; i++) {
   rows.push([]);
 }
 
-// function
+function checkWord(row: string[], letters: string[]): WordResult {
+  // This is not ready yet.
+  return {
+    letters: [],
+  };
+}
 
 export const useGameStore = defineStore('gameStore', {
   state: () => ({
@@ -17,6 +22,7 @@ export const useGameStore = defineStore('gameStore', {
     rowsUsed: 0,
     rows,
     letters: [] as string[],
+    results: [] as WordResult[],
   }),
   actions: {
     setLetters(letters: string[]) {
@@ -39,11 +45,8 @@ export const useGameStore = defineStore('gameStore', {
       if (this.rows[this.currentRowIndex].length < 5) {
         return;
       }
-      console.log(
-        'submitRow',
-        this.rows[this.currentRowIndex] + ' vs letters: ',
-        this.letters.join(''),
-      );
+      const result = checkWord(this.rows[this.currentRowIndex], this.letters);
+      console.log('submitRow', result);
     },
   },
 });
