@@ -4,13 +4,16 @@ import Row from '@/components/Row.vue';
 
 <template>
   <div class="grid-view">
-    <h2>Grid here</h2>
-    <Row />
+    <Row v-for="(n, i) in 6" :key="i" :index="i" />
   </div>
 </template>
 
 <style scoped>
 .grid-view {
-  /* empty TODO */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 </style>

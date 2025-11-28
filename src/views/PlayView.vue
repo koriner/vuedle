@@ -1,19 +1,31 @@
 <script setup lang="ts">
 import Grid from '@/components/Grid.vue';
+import { onMounted, ref } from 'vue';
+import { useWordStore } from '@/stores/word-store';
+import { useGameStore } from '@/stores/game-store';
 import type { Word } from '@/types/words';
-import { getRandomWord } from '@/services/words-api';
-import { ref, onMounted } from 'vue';
 
+const wordStore = useWordStore();
+const gameStore = useGameStore();
 const word = ref<Word | null>(null);
+const rows = ref<string[][]>([]);
 
 onMounted(async () => {
-  word.value = await getRandomWord();
+  const wordValue = await wordStore.getRandomWord();
+  const rowsValue = gameStore.getRows();
+
+  if (wordValue) {
+    word.value = wordValue;
+  }
+  if (rowsValue) {
+    rows.value = rowsValue as string[][];
+  }
 });
 </script>
 
 <template>
-  <div class="game-view">
-    <h1>Game View</h1>
+  <div class="play-view">
+    <h1>Play View</h1>
     <div v-if="word">
       <h2>Word: {{ word.word }}</h2>
     </div>

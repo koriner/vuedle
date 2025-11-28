@@ -1,17 +1,24 @@
 <script setup lang="ts">
-// defineProps<{
-//   //
-// }>();
+defineProps<{
+  columnIndex: number;
+  rowIndex: number;
+}>();
 </script>
 
 <template>
   <div class="tile-item">
-    <span>Tile here</span>
+    <span>Tile {{ columnIndex }}-{{ rowIndex }}</span>
   </div>
 </template>
 
 <style scoped>
 .tile-item {
-  /* empty TODO */
+  border: 1px solid red;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
 }
 </style>

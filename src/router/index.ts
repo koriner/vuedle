@@ -21,12 +21,6 @@ const router = createRouter({
       name: 'play',
       component: PlayView,
     },
-    // {
-    //   path: '/event/:id',
-    //   name: 'event-details',
-    //   props: true,
-    //   component: () => import('@/views/EventDetailsView.vue'),
-    // },
   ],
 });
 
