@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Grid from '@/components/Grid.vue';
+import Keyboard from '@/components/Keyboard.vue';
 import { onMounted, ref } from 'vue';
 import { useWordStore } from '@/stores/word-store';
 import { useGameStore } from '@/stores/game-store';
@@ -34,8 +35,20 @@ onMounted(async () => {
     </div>
     <Grid />
   </div>
+  <div class="keyboard-container">
+    <Keyboard />
+  </div>
 </template>
 
 <style scoped>
-/* Put scoped stuff in here */
+.play-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.keyboard-container {
+  margin-top: 2.5rem;
+}
 </style>
