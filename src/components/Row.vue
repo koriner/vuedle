@@ -2,13 +2,14 @@
 import Tile from '@/components/Tile.vue';
 defineProps<{
   index: number;
+  isRowEnabled: boolean;
 }>();
 </script>
 
 <template>
   <div class="row-view">
     <div v-for="(n, i) in 6" :key="i">
-      <Tile :columnIndex="i" :rowIndex="index" />
+      <Tile :columnIndex="i" :rowIndex="index" :isTileEnabled="isRowEnabled" />
     </div>
   </div>
 </template>

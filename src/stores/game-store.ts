@@ -8,7 +8,6 @@ const rows: string[][] = [];
 for (let i = 0; i < 6; i++) {
   rows.push([]);
 }
-console.log('rows', rows);
 
 export const useGameStore = defineStore('gameStore', {
   state: () => ({
