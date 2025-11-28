@@ -4,13 +4,20 @@ defineProps<{
   rowIndex: number;
   isTileEnabled: boolean;
   letter: string;
+  result: 'correct' | 'incorrect' | 'present';
 }>();
 </script>
 
 <template>
   <div
     class="tile-item"
-    :class="{ 'tile-item-enabled': isTileEnabled, 'tile-item-disabled': !isTileEnabled }"
+    :class="{
+      'tile-item-enabled': isTileEnabled,
+      'tile-item-disabled': !isTileEnabled,
+      'tile-item-correct': result === 'correct',
+      'tile-item-incorrect': result === 'incorrect',
+      'tile-item-present': result === 'present',
+    }"
   >
     <span>{{ letter }}</span>
   </div>
@@ -25,6 +32,9 @@ defineProps<{
   justify-content: center;
   align-items: center;
   padding: 0.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
 
   &:hover {
     background-color: #aa17ce;
@@ -45,5 +55,20 @@ defineProps<{
     background-color: transparent;
     cursor: not-allowed;
   }
+}
+
+.tile-item-correct {
+  background-color: #44b23a;
+  color: #fff;
+}
+
+.tile-item-incorrect {
+  background-color: #d52a30;
+  color: #fff;
+}
+
+.tile-item-present {
+  background-color: #dfbf31;
+  color: #fff;
 }
 </style>

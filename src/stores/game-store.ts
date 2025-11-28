@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import type { WordResult } from '@/types/words';
+import type { WordResult, Result } from '@/types/words';
 /**
  * This state contains game logic and progress.
  */
@@ -9,11 +9,40 @@ for (let i = 0; i < 6; i++) {
   rows.push([]);
 }
 
+/* Check the word submitted against the letters and return the result */
 function checkWord(row: string[], letters: string[]): WordResult {
-  // This is not ready yet.
-  return {
-    letters: [],
-  };
+  const result: WordResult = ['incorrect', 'incorrect', 'incorrect', 'incorrect', 'incorrect'];
+
+  letters.forEach((letter, lIndex) => {
+    let letterResult: Result = 'incorrect';
+
+    if (row[lIndex].toUpperCase() === letter.toUpperCase()) {
+      letterResult = 'correct';
+    }
+
+    if (letterResult !== 'correct') {
+      const otherIndex = row.indexOf(letter.toUpperCase());
+      if (otherIndex !== -1) {
+        letterResult = 'present';
+        result[otherIndex] = 'present';
+      }
+    }
+
+    if (letterResult === 'correct') {
+      result[lIndex] = 'correct';
+    }
+  });
+
+  return result;
+}
+function createEmptyWordResults(): WordResult[] {
+  const res: WordResult[] = [];
+
+  for (let i = 0; i < 6; i++) {
+    res[i] = ['none', 'none', 'none', 'none', 'none'];
+  }
+
+  return res;
 }
 
 export const useGameStore = defineStore('gameStore', {
@@ -22,14 +51,11 @@ export const useGameStore = defineStore('gameStore', {
     rowsUsed: 0,
     rows,
     letters: [] as string[],
-    results: [] as WordResult[],
+    results: createEmptyWordResults(),
   }),
   actions: {
     setLetters(letters: string[]) {
       this.letters = letters;
-    },
-    getRows() {
-      return this.rows;
     },
     addLetterToRow(letter: string) {
       const row = this.rows[this.currentRowIndex];
@@ -46,7 +72,18 @@ export const useGameStore = defineStore('gameStore', {
         return;
       }
       const result = checkWord(this.rows[this.currentRowIndex], this.letters);
-      console.log('submitRow', result);
+      this.results[this.currentRowIndex] = result;
+      const isMatch = result.every((r) => r === 'correct');
+
+      if (isMatch) {
+        // SUCCESS TODO!
+        return;
+      } else if (this.currentRowIndex < 5 && !isMatch) {
+        this.currentRowIndex++;
+      } else {
+        // FAIL TODO!
+        return;
+      }
     },
   },
 });

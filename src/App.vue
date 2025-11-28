@@ -6,6 +6,7 @@ import { RouterLink, RouterView } from 'vue-router';
   <div id="layout">
     <header>
       <div class="wrapper">
+        <img src="@/assets/logo.png" alt="Vuedle Logo" class="logo" />
         <nav class="nav-bar">
           <div>
             <RouterLink to="/">Home</RouterLink>
@@ -16,6 +17,7 @@ import { RouterLink, RouterView } from 'vue-router';
           <div>
             <RouterLink to="/about">About</RouterLink>
           </div>
+          <a href="#">Restart</a>
         </nav>
       </div>
     </header>
@@ -32,17 +34,31 @@ import { RouterLink, RouterView } from 'vue-router';
   color: #2c3e50;
 }
 
+.logo {
+  width: auto;
+  height: 200px;
+  border: 2px solid purple;
+  border-radius: 6px;
+  margin-top: 12px;
+}
+
 .nav-bar {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 10px;
-  background-color: #f0f0f0;
+  padding: 20px;
   border-radius: 5px;
 
   > div {
     padding: 0 10px;
+  }
+
+  > a {
+    padding: 0 10px;
+    text-decoration: none;
+    color: #2c3e50;
+    cursor: pointer;
   }
 }
 </style>

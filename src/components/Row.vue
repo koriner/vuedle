@@ -2,9 +2,12 @@
 import Tile from '@/components/Tile.vue';
 import { ref } from 'vue';
 import { useGameStore } from '@/stores/game-store';
+import type { WordResult } from '@/types/words';
+
 const props = defineProps<{
   index: number;
   isRowEnabled: boolean;
+  rowResult: WordResult;
 }>();
 
 const gameStore = useGameStore();
@@ -19,6 +22,7 @@ const row = ref<string[]>(gameStore.rows[props.index]);
         :rowIndex="index"
         :isTileEnabled="isRowEnabled"
         :letter="row[i] ?? ''"
+        :result="rowResult[i] ?? 'incorrect'"
       />
     </div>
   </div>

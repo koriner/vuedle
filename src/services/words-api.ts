@@ -15,6 +15,5 @@ export const getRandomWord = async (): Promise<Word> => {
   const response = await client.get('/');
   const allWords = response.data as Word[];
   const randomWord = allWords[Math.floor(Math.random() * allWords.length)];
-  console.log(randomWord);
   return { word: randomWord.word, letters: randomWord.letters };
 };

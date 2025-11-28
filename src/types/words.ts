@@ -4,10 +4,7 @@ export type Word = {
   letters: string[];
 };
 
+export type Result = 'correct' | 'incorrect' | 'present' | 'none';
+
 // A result of checking 5 letters against a word
-export type WordResult = {
-  letters: Array<{
-    letter: string;
-    result: 'correct' | 'incorrect' | 'present';
-  }>;
-};
+export type WordResult = Result[];
