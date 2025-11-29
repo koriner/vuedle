@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Grid from '@/components/Grid.vue';
 import Keyboard from '@/components/Keyboard.vue';
+import SuccessExplosion from '@/components/SuccessExplosion.vue';
 import { onMounted, ref } from 'vue';
 import { useWordStore } from '@/stores/word-store';
 import { useGameStore } from '@/stores/game-store';
@@ -38,6 +39,7 @@ onMounted(async () => {
   <div class="keyboard-container">
     <Keyboard />
   </div>
+  <SuccessExplosion v-if="gameStore.isGameWon && !gameStore.hideAnimation" />
 </template>
 
 <style scoped>

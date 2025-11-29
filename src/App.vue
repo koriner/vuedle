@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router';
+import { useGameStore } from '@/stores/game-store';
+
+const gameStore = useGameStore();
 </script>
 
 <template>
@@ -17,7 +20,7 @@ import { RouterLink, RouterView } from 'vue-router';
           <div>
             <RouterLink to="/about">About</RouterLink>
           </div>
-          <a href="#">Restart</a>
+          <a href="#" @click="gameStore.restartGame">Restart</a>
         </nav>
       </div>
     </header>
@@ -27,7 +30,7 @@ import { RouterLink, RouterView } from 'vue-router';
 
 <style>
 #layout {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -43,6 +46,8 @@ import { RouterLink, RouterView } from 'vue-router';
 }
 
 .nav-bar {
+  font-family: 'Bungee Spice', sans-serif;
+  font-size: 1.5rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -50,15 +55,23 @@ import { RouterLink, RouterView } from 'vue-router';
   padding: 20px;
   border-radius: 5px;
 
-  > div {
+  div {
     padding: 0 10px;
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.25) skew(4deg, 2deg);
+    }
   }
 
-  > a {
+  a {
     padding: 0 10px;
     text-decoration: none;
-    color: #2c3e50;
     cursor: pointer;
+  }
+
+  a:hover {
+    transform: scale(1.25) skew(4deg, 2deg);
   }
 }
 </style>

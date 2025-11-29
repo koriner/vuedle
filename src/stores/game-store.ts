@@ -4,9 +4,12 @@ import type { WordResult, Result } from '@/types/words';
  * This state contains game logic and progress.
  */
 
-const rows: string[][] = [];
-for (let i = 0; i < 6; i++) {
-  rows.push([]);
+function createEmptyRows(): string[][] {
+  const res: string[][] = [];
+  for (let i = 0; i < 6; i++) {
+    res.push([]);
+  }
+  return res;
 }
 
 /* Check the word submitted against the letters and return the result */
@@ -35,6 +38,7 @@ function checkWord(row: string[], letters: string[]): WordResult {
 
   return result;
 }
+
 function createEmptyWordResults(): WordResult[] {
   const res: WordResult[] = [];
 
@@ -49,25 +53,37 @@ export const useGameStore = defineStore('gameStore', {
   state: () => ({
     currentRowIndex: 0,
     rowsUsed: 0,
-    rows,
+    rows: createEmptyRows(),
     letters: [] as string[],
     results: createEmptyWordResults(),
+    isGameWon: false,
+    isGameLost: false,
+    hideAnimation: true,
   }),
   actions: {
     setLetters(letters: string[]) {
       this.letters = letters;
     },
     addLetterToRow(letter: string) {
+      if (this.isGameWon || this.isGameLost) {
+        return;
+      }
       const row = this.rows[this.currentRowIndex];
       if (row.length < 5) {
         row.push(letter);
       }
     },
     removeLastLetterFromRow() {
+      if (this.isGameWon || this.isGameLost) {
+        return;
+      }
       const row = this.rows[this.currentRowIndex];
       row.pop();
     },
     submitRow() {
+      if (this.isGameWon || this.isGameLost) {
+        return;
+      }
       if (this.rows[this.currentRowIndex].length < 5) {
         return;
       }
@@ -76,14 +92,28 @@ export const useGameStore = defineStore('gameStore', {
       const isMatch = result.every((r) => r === 'correct');
 
       if (isMatch) {
-        // SUCCESS TODO!
-        return;
+        this.isGameWon = true;
+        this.isGameLost = false;
+        this.hideAnimation = false;
+        setTimeout(() => {
+          this.hideAnimation = true;
+        }, 10_000);
       } else if (this.currentRowIndex < 5 && !isMatch) {
         this.currentRowIndex++;
       } else {
-        // FAIL TODO!
-        return;
+        this.isGameWon = false;
+        this.isGameLost = true;
+        this.hideAnimation = true;
       }
+    },
+    restartGame() {
+      console.log('restartGame...');
+      this.currentRowIndex = 0;
+      this.rowsUsed = 0;
+      this.isGameWon = this.isGameLost = false;
+      this.rows = createEmptyRows();
+      this.results = createEmptyWordResults();
+      this.letters = [];
     },
   },
 });

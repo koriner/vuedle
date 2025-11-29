@@ -11,7 +11,9 @@ const props = defineProps<{
 }>();
 
 const gameStore = useGameStore();
-const row = ref<string[]>(gameStore.rows[props.index]);
+const row = gameStore.rows[props.index];
+console.log('row', row);
+console.log('rowResult', props.rowResult);
 </script>
 
 <template>

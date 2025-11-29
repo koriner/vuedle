@@ -62,6 +62,7 @@ onMounted(() => {
   transform: translateX(10px);
 }
 .keyboard-letter {
+  font-family: 'Bungee Spice', sans-serif;
   cursor: pointer;
   border: 1px solid #aa17ce;
   width: 40px;
@@ -69,15 +70,16 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: bold;
   background-color: #d3d6da;
   border-radius: 4px;
 
   &:hover {
-    background-color: #aa17ce;
+    background-color: black;
     color: #fff;
     transition: all 0.3s ease-out;
+    font-size: 2.25rem;
   }
 }
 .keyboard-letter-icon {
