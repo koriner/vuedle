@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router';
-import { useGameStore } from '@/stores/game-store';
 
-const gameStore = useGameStore();
+function restartGame(event: Event) {
+  event.preventDefault();
+  window.location.href = '/play';
+}
 </script>
 
 <template>
@@ -20,7 +22,7 @@ const gameStore = useGameStore();
           <div>
             <RouterLink to="/about">About</RouterLink>
           </div>
-          <a href="#" @click="gameStore.restartGame">Restart</a>
+          <a href="#" @click.prevent="restartGame">Restart</a>
         </nav>
       </div>
     </header>
@@ -30,7 +32,7 @@ const gameStore = useGameStore();
 
 <style>
 #layout {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Stack Sans Headline', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

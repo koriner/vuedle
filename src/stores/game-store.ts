@@ -97,7 +97,7 @@ export const useGameStore = defineStore('gameStore', {
         this.hideAnimation = false;
         setTimeout(() => {
           this.hideAnimation = true;
-        }, 10_000);
+        }, 7_500);
       } else if (this.currentRowIndex < 5 && !isMatch) {
         this.currentRowIndex++;
       } else {
@@ -105,15 +105,6 @@ export const useGameStore = defineStore('gameStore', {
         this.isGameLost = true;
         this.hideAnimation = true;
       }
-    },
-    restartGame() {
-      console.log('restartGame...');
-      this.currentRowIndex = 0;
-      this.rowsUsed = 0;
-      this.isGameWon = this.isGameLost = false;
-      this.rows = createEmptyRows();
-      this.results = createEmptyWordResults();
-      this.letters = [];
     },
   },
 });
