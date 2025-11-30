@@ -11,12 +11,6 @@ const router = createRouter({
       component: LandingView,
     },
     {
-      path: '/about',
-      name: 'about',
-      // Lazy load the AboutView component, not really needed but whatevs
-      component: () => import('@/views/AboutView.vue'),
-    },
-    {
       path: '/play',
       name: 'play',
       component: PlayView,

@@ -2,6 +2,7 @@
 import Grid from '@/components/Grid.vue';
 import Keyboard from '@/components/Keyboard.vue';
 import SuccessExplosion from '@/components/SuccessExplosion.vue';
+import FailedOverlay from '@/components/FailedOverlay.vue';
 import { onMounted, ref } from 'vue';
 import { useWordStore } from '@/stores/word-store';
 import { useGameStore } from '@/stores/game-store';
@@ -40,6 +41,7 @@ onMounted(async () => {
     <Keyboard />
   </div>
   <SuccessExplosion v-if="gameStore.isGameWon && !gameStore.hideAnimation" />
+  <FailedOverlay v-if="gameStore.isGameLost" :word="word?.word ?? ''" />
 </template>
 
 <style scoped>
@@ -54,6 +56,7 @@ onMounted(async () => {
   position: absolute;
   top: 20px;
   right: 20px;
+  opacity: 0;
 }
 .keyboard-container {
   margin-top: 2.5rem;

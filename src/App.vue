@@ -19,9 +19,6 @@ function restartGame(event: Event) {
           <div>
             <RouterLink to="/play">Play</RouterLink>
           </div>
-          <div>
-            <RouterLink to="/about">About</RouterLink>
-          </div>
           <a href="#" @click.prevent="restartGame">Restart</a>
         </nav>
       </div>
