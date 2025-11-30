@@ -28,6 +28,6 @@ const { currentRowIndex, results, isGameLost } = storeToRefs(gameStore);
   gap: 1rem;
 }
 .grid-view-lost {
-  opacity: 0.5;
+  opacity: 0.35;
 }
 </style>

@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import type { Result } from '@/types/words';
+
 defineProps<{
   columnIndex: number;
   rowIndex: number;
   isTileEnabled: boolean;
   letter: string;
-  result: 'correct' | 'incorrect' | 'present';
+  result: Result;
 }>();
 </script>
 

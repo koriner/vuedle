@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import Tile from '@/components/Tile.vue';
-import { ref } from 'vue';
 import { useGameStore } from '@/stores/game-store';
-import type { WordResult } from '@/types/words';
+import type { WordResult, Result } from '@/types/words';
 
 const props = defineProps<{
   index: number;
@@ -24,7 +23,7 @@ console.log('rowResult', props.rowResult);
         :rowIndex="index"
         :isTileEnabled="isRowEnabled"
         :letter="row[i] ?? ''"
-        :result="rowResult[i] ?? 'incorrect'"
+        :result="rowResult[i]"
       />
     </div>
   </div>
