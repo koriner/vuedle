@@ -90,7 +90,6 @@ onMounted(() => {
 @media (max-width: 768px) {
   .keyboard-view {
     transform: scale(0.9) translateX(0px);
-    opacity: 0.2;
     grid-template-columns: repeat(7, 1fr);
   }
 }
