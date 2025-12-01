@@ -73,4 +73,15 @@ function restartGame(event: Event) {
     transform: scale(1.25) skew(4deg, 2deg);
   }
 }
+
+@media (max-width: 768px) {
+  #layout {
+    max-height: 100vh;
+    overflow-y: hidden;
+  }
+
+  .logo {
+    height: 100px;
+  }
+}
 </style>

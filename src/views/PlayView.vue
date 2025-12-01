@@ -62,4 +62,10 @@ onMounted(async () => {
   margin-top: 2.5rem;
   padding-bottom: 100px;
 }
+
+@media (max-width: 768px) {
+  .play-view {
+    max-height: 320px;
+  }
+}
 </style>

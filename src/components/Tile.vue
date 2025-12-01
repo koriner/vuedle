@@ -73,4 +73,11 @@ defineProps<{
   background-color: #dfbf31;
   color: #fff;
 }
+
+@media (max-width: 768px) {
+  .tile-item {
+    width: 3.2rem;
+    height: 3.2rem;
+  }
+}
 </style>

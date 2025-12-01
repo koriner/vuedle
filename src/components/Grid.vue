@@ -30,4 +30,10 @@ const { currentRowIndex, results, isGameLost } = storeToRefs(gameStore);
 .grid-view-lost {
   opacity: 0.35;
 }
+
+@media (max-width: 768px) {
+  .grid-view {
+    transform: scale(0.65);
+  }
+}
 </style>
